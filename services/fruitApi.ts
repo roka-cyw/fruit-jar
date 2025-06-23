@@ -9,10 +9,6 @@ const apiHeaders = {
 
 export const fruitApi = {
   async getAllFruits(): Promise<Fruit[]> {
-    console.log('API_BASE:', API_BASE)
-    console.log('API_KEY:', API_KEY)
-    console.log('Environment:', import.meta.env.MODE)
-
     const response = await fetch(`${API_BASE}/fruits`, {
       headers: apiHeaders
     })
