@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
+import { Loader } from 'lucide-react'
 
 import FruitListActions from './FruitListActions'
 import FruitListView from './FruitListView'
@@ -11,7 +12,12 @@ import { groupFruits } from '../../utils/grouping'
 
 import type { Fruit, GroupByOption, ViewMode } from '../../types'
 
-const FruitList = () => {
+interface Props {
+  onAddFruit: (fruit: Fruit) => void
+  onAddMultiple: (fruits: Fruit[]) => void
+}
+
+const FruitList = ({ onAddFruit, onAddMultiple }: Props) => {
   const [fruits, setFruits] = useState<Fruit[]>([])
   const [loading, setLoading] = useState(true)
   const [groupBy, setGroupBy] = useState<GroupByOption>('none')
@@ -19,21 +25,13 @@ const FruitList = () => {
 
   const groupedFruits = groupBy !== 'none' ? groupFruits(fruits, groupBy) : []
 
-  const handleAddFruit = (fruit: Fruit) => {
-    toast(`Added ${fruit.name} to jar`, { icon: '✅' })
-  }
-
-  const handleAddGroup = (fruits: Fruit[]) => {
-    toast(`Added ${fruits.length} fruits to jar`, { icon: '✅' })
-  }
-
   useEffect(() => {
     const loadFruits = async () => {
       try {
         const data = await fruitApi.getAllFruits()
         setFruits(data)
 
-        toast('Fruits fetched successfully', { icon: '👌👌' })
+        toast('Fruits fetched successfully', { icon: '👌' })
       } catch (error) {
         toast.error('Failed to fetch fruits')
         console.error('Error fetching fruits:', error)
@@ -48,7 +46,10 @@ const FruitList = () => {
   if (loading) {
     return (
       <div className='h-full flex items-center justify-center'>
-        <div className='text-gray-500'>Loading fruits...</div>
+        <div className='text-gray-500 flex'>
+          <Loader className='animate-spin w-6 h-6' />
+          <p className='ml-2'>Loading fruits... </p>
+        </div>
       </div>
     )
   }
@@ -66,14 +67,14 @@ const FruitList = () => {
         <GroupedFruitDisplay
           groupedFruits={groupedFruits}
           viewMode={viewMode}
-          onAddFruit={handleAddFruit}
-          onAddGroup={handleAddGroup}
+          onAddFruit={onAddFruit}
+          onAddGroup={onAddMultiple}
         />
       ) : // Regular flat display when groupBy is 'none'
       viewMode === 'list' ? (
-        <FruitListView fruits={fruits} onAddFruit={handleAddFruit} />
+        <FruitListView fruits={fruits} onAddFruit={onAddFruit} />
       ) : (
-        <FruitTableView fruits={fruits} onAddFruit={handleAddFruit} />
+        <FruitTableView fruits={fruits} onAddFruit={onAddFruit} />
       )}
     </div>
   )

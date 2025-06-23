@@ -13,7 +13,7 @@ const ViewToggle = ({ mode, onChange }: Props) => {
         <button
           onClick={() => onChange('table')}
           className={`px-4 py-2 text-sm font-medium transition-colors ${
-            mode === 'table' ? 'bg-blue-800 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'
+            mode === 'table' ? 'bg-blue-700 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'
           }`}
         >
           Table
@@ -21,7 +21,7 @@ const ViewToggle = ({ mode, onChange }: Props) => {
         <button
           onClick={() => onChange('list')}
           className={`px-6 py-2 text-sm font-medium border-l border-gray-300 transition-colors ${
-            mode === 'list' ? 'bg-blue-800 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'
+            mode === 'list' ? 'bg-blue-700 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'
           }`}
         >
           List

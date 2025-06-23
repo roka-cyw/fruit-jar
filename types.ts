@@ -20,3 +20,9 @@ export interface GroupedFruits {
   groupName: string
   fruits: Fruit[]
 }
+
+export interface JarItem {
+  fruit: Fruit
+  quantity: number
+  id: string
+}

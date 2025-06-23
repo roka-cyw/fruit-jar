@@ -77,7 +77,7 @@ const GroupedFruitDisplay = ({ groupedFruits, viewMode, onAddFruit, onAddGroup }
                           </div>
                           <button
                             onClick={() => onAddFruit(fruit)}
-                            className='px-3 py-1 bg-blue-800 text-white text-sm rounded hover:bg-blue-600 transition-colors'
+                            className='px-3 py-1 bg-blue-700 text-white text-sm rounded hover:bg-blue-600 transition-colors'
                           >
                             Add
                           </button>
@@ -111,7 +111,7 @@ const GroupedFruitDisplay = ({ groupedFruits, viewMode, onAddFruit, onAddGroup }
                               <td className='px-4 py-2'>
                                 <button
                                   onClick={() => onAddFruit(fruit)}
-                                  className='px-3 py-1 bg-blue-800 text-white text-sm rounded hover:bg-blue-600 transition-colors'
+                                  className='px-3 py-1 bg-blue-700 text-white text-sm rounded hover:bg-blue-600 transition-colors'
                                 >
                                   Add
                                 </button>

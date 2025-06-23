@@ -47,7 +47,7 @@ const FruitTableView = ({ fruits, onAddFruit }: Props) => {
                 <td className='px-3 py-2 whitespace-nowrap'>
                   <button
                     onClick={() => onAddFruit(fruit)}
-                    className='px-4 py-1 bg-blue-800 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors'
+                    className='px-4 py-1 bg-blue-700 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors'
                   >
                     Add
                   </button>
