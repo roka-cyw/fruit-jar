@@ -15,3 +15,8 @@ export interface Fruit {
     protein: number
   }
 }
+
+export interface GroupedFruits {
+  groupName: string
+  fruits: Fruit[]
+}

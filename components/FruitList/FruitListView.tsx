@@ -26,7 +26,7 @@ const FruitListView = ({ fruits, onAddFruit }: Props) => {
             </div>
             <button
               onClick={() => onAddFruit(fruit)}
-              className='px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors flex-shrink-0'
+              className='px-4 py-2 bg-blue-800 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors flex-shrink-0'
             >
               Add
             </button>

@@ -29,25 +29,25 @@ const FruitTableView = ({ fruits, onAddFruit }: Props) => {
           <tbody className='bg-white divide-y divide-gray-200'>
             {fruits.map(fruit => (
               <tr key={fruit.id} className='hover:bg-gray-50 transition-colors'>
-                <td className='px-3 py-2whitespace-nowrap'>
+                <td className='px-3 py-2 whitespace-nowrap'>
                   <div className='text-sm font-medium text-gray-900'>{fruit.name}</div>
                 </td>
-                <td className='px-3 py-2whitespace-nowrap'>
+                <td className='px-3 py-2 whitespace-nowrap'>
                   <div className='text-sm text-gray-500'>{fruit.family}</div>
                 </td>
-                <td className='px-3 py-2whitespace-nowrap'>
+                <td className='px-3 py-2 whitespace-nowrap'>
                   <div className='text-sm text-gray-500'>{fruit.order}</div>
                 </td>
-                <td className='px-3 py-2whitespace-nowrap'>
+                <td className='px-3 py-2 whitespace-nowrap'>
                   <div className='text-sm text-gray-500'>{fruit.genus}</div>
                 </td>
-                <td className='px-3 py-2whitespace-nowrap'>
+                <td className='px-3 py-2 whitespace-nowrap'>
                   <div className='text-sm text-gray-500'>{fruit.nutritions.calories}</div>
                 </td>
-                <td className='px-3 py-2whitespace-nowrap'>
+                <td className='px-3 py-2 whitespace-nowrap'>
                   <button
                     onClick={() => onAddFruit(fruit)}
-                    className='px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors'
+                    className='px-4 py-1 bg-blue-800 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors'
                   >
                     Add
                   </button>

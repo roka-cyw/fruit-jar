@@ -1,13 +1,11 @@
-import React from 'react'
-
 import type { GroupByOption } from '../../types'
 
-interface GroupBySelectorProps {
+interface Props {
   value: GroupByOption
   onChange: (value: GroupByOption) => void
 }
 
-const GroupBySelector: React.FC<GroupBySelectorProps> = ({ value, onChange }) => {
+const GroupBySelector = ({ value, onChange }: Props) => {
   const options = [
     { value: 'none', label: 'None' },
     { value: 'family', label: 'Family' },

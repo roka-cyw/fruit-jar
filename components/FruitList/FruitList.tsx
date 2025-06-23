@@ -4,6 +4,10 @@ import toast from 'react-hot-toast'
 import FruitListActions from './FruitListActions'
 import FruitListView from './FruitListView'
 import FruitTableView from './FruitTableView'
+import GroupedFruitDisplay from '../FruitList/GroupedFruitDisplay'
+
+import { fruitApi } from '../../services/fruitApi'
+import { groupFruits } from '../../utils/grouping'
 
 import type { Fruit, GroupByOption, ViewMode } from '../../types'
 
@@ -13,27 +17,32 @@ const FruitList = () => {
   const [groupBy, setGroupBy] = useState<GroupByOption>('none')
   const [viewMode, setViewMode] = useState<ViewMode>('list')
 
+  const groupedFruits = groupBy !== 'none' ? groupFruits(fruits, groupBy) : []
+
+  const handleAddFruit = (fruit: Fruit) => {
+    toast(`Added ${fruit.name} to jar`, { icon: '✅' })
+  }
+
+  const handleAddGroup = (fruits: Fruit[]) => {
+    toast(`Added ${fruits.length} fruits to jar`, { icon: '✅' })
+  }
+
   useEffect(() => {
-    fetch('https://fruity-proxy.vercel.app/api/fruits', {
-      headers: {
-        'x-api-key': 'fruit-api-challenge-2025'
-      }
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch fruits')
-        }
-        return response.json()
-      })
-      .then(data => {
+    const loadFruits = async () => {
+      try {
+        const data = await fruitApi.getAllFruits()
         setFruits(data)
-        setLoading(false)
-        toast('Fruits fetched successfully', { icon: '👌' })
-      })
-      .catch(error => {
+
+        toast('Fruits fetched successfully', { icon: '👌👌' })
+      } catch (error) {
         toast.error('Failed to fetch fruits')
+        console.error('Error fetching fruits:', error)
+      } finally {
         setLoading(false)
-      })
+      }
+    }
+
+    loadFruits()
   }, [])
 
   if (loading) {
@@ -46,21 +55,25 @@ const FruitList = () => {
 
   return (
     <div className='h-full bg-grey-200 flex flex-col p-6 gap-10'>
-      {/* Actions Section */}
-      <div className=''>
-        <FruitListActions
-          groupBy={groupBy}
-          onGroupByChange={setGroupBy}
-          viewMode={viewMode}
-          onViewModeChange={setViewMode}
-        />
-      </div>
+      <FruitListActions
+        groupBy={groupBy}
+        onGroupByChange={setGroupBy}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
+      />
 
-      {/* Fruits List Section */}
-      {viewMode === 'list' ? (
-        <FruitListView fruits={fruits} onAddFruit={() => console.log('on add list')} />
+      {groupBy !== 'none' ? (
+        <GroupedFruitDisplay
+          groupedFruits={groupedFruits}
+          viewMode={viewMode}
+          onAddFruit={handleAddFruit}
+          onAddGroup={handleAddGroup}
+        />
+      ) : // Regular flat display when groupBy is 'none'
+      viewMode === 'list' ? (
+        <FruitListView fruits={fruits} onAddFruit={handleAddFruit} />
       ) : (
-        <FruitTableView fruits={fruits} onAddFruit={() => console.log('on add table')} />
+        <FruitTableView fruits={fruits} onAddFruit={handleAddFruit} />
       )}
     </div>
   )
