@@ -1,7 +1,7 @@
 import type { Fruit } from '../types'
 
-const API_BASE = 'https://fruity-proxy.vercel.app/api'
-const API_KEY = 'fruit-api-challenge-2025'
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://fruity-proxy.vercel.app/api'
+const API_KEY = import.meta.env.VITE_API_KEY || 'fruit-api-challenge-2025'
 
 const apiHeaders = {
   'x-api-key': API_KEY
