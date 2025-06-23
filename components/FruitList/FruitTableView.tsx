@@ -6,6 +6,10 @@ interface Props {
 }
 
 const FruitTableView = ({ fruits, onAddFruit }: Props) => {
+  const handleAddFruit = (fruit: Fruit) => () => {
+    onAddFruit?.(fruit)
+  }
+
   return (
     <div className='flex-1 overflow-y-auto'>
       <div className='mb-4'>
@@ -46,7 +50,7 @@ const FruitTableView = ({ fruits, onAddFruit }: Props) => {
                 </td>
                 <td className='px-3 py-2 whitespace-nowrap'>
                   <button
-                    onClick={() => onAddFruit(fruit)}
+                    onClick={handleAddFruit(fruit)}
                     className='px-4 py-1 bg-blue-700 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors'
                   >
                     Add

@@ -24,6 +24,14 @@ const GroupedFruitDisplay = ({ groupedFruits, viewMode, onAddFruit, onAddGroup }
 
   const totalFruits = groupedFruits.reduce((total, group) => total + group.fruits.length, 0)
 
+  const handleAddFruit = (fruit: Fruit) => () => {
+    onAddFruit?.(fruit)
+  }
+
+  const handleToggleGroup = (groupName: string) => () => {
+    toggleGroup?.(groupName)
+  }
+
   return (
     <div className='flex-1 overflow-y-auto'>
       <div className='mb-4'>
@@ -39,7 +47,7 @@ const GroupedFruitDisplay = ({ groupedFruits, viewMode, onAddFruit, onAddGroup }
               {/* Group Header */}
               <div
                 className='flex justify-between items-center p-4 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors'
-                onClick={() => toggleGroup(group.groupName)}
+                onClick={handleToggleGroup(group.groupName)}
               >
                 <div className='flex items-center gap-2'>
                   <span className='text-lg font-medium'>
@@ -76,7 +84,7 @@ const GroupedFruitDisplay = ({ groupedFruits, viewMode, onAddFruit, onAddGroup }
                             </span>
                           </div>
                           <button
-                            onClick={() => onAddFruit(fruit)}
+                            onClick={handleAddFruit(fruit)}
                             className='px-3 py-1 bg-blue-700 text-white text-sm rounded hover:bg-blue-600 transition-colors'
                           >
                             Add
@@ -110,7 +118,7 @@ const GroupedFruitDisplay = ({ groupedFruits, viewMode, onAddFruit, onAddGroup }
                               <td className='px-4 py-2 text-sm text-gray-500'>{fruit.nutritions.calories}</td>
                               <td className='px-4 py-2'>
                                 <button
-                                  onClick={() => onAddFruit(fruit)}
+                                  onClick={handleAddFruit(fruit)}
                                   className='px-3 py-1 bg-blue-700 text-white text-sm rounded hover:bg-blue-600 transition-colors'
                                 >
                                   Add

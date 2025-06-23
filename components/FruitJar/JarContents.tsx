@@ -6,6 +6,10 @@ interface Props {
 }
 
 const JarContents = ({ jarItems, onRemoveItem }: Props) => {
+  const handleRemoveItem = (jarItemId: string) => () => {
+    onRemoveItem?.(jarItemId)
+  }
+
   return (
     <div className='h-full flex flex-col'>
       <h3 className='text-lg font-medium text-gray-800 mb-3'>Selected Fruits</h3>
@@ -32,7 +36,7 @@ const JarContents = ({ jarItems, onRemoveItem }: Props) => {
             </div>
 
             <button
-              onClick={() => onRemoveItem(item.id)}
+              onClick={handleRemoveItem(item.id)}
               className='px-2 py-1 bg-red-100 text-red-700 text-sm rounded hover:bg-red-200 transition-colors flex-shrink-0'
               title={`Remove one ${item.fruit.name}`}
             >

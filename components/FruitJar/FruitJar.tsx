@@ -17,6 +17,10 @@ const FruitJar = ({ jarItems, totalCalories, onRemoveItem, onСlearAllFromJar }:
   const [viewMode, setViewMode] = useState<JarViewMode>('list')
   const totalItems = jarItems.reduce((sum, item) => sum + item.quantity, 0)
 
+  const handleViewMode = (mode: JarViewMode) => () => {
+    setViewMode(mode)
+  }
+
   return (
     <div className='h-full flex flex-col p-6'>
       {/* Header with View Toggle */}
@@ -39,7 +43,7 @@ const FruitJar = ({ jarItems, totalCalories, onRemoveItem, onСlearAllFromJar }:
             <label className='text-sm font-medium text-gray-700'>View:</label>
             <div className='flex rounded-md border border-gray-300 overflow-hidden'>
               <button
-                onClick={() => setViewMode('list')}
+                onClick={handleViewMode('list')}
                 className={`px-6 py-2 text-sm font-medium transition-colors ${
                   viewMode === 'list' ? 'bg-blue-700 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'
                 }`}
@@ -47,7 +51,7 @@ const FruitJar = ({ jarItems, totalCalories, onRemoveItem, onСlearAllFromJar }:
                 List
               </button>
               <button
-                onClick={() => setViewMode('chart')}
+                onClick={handleViewMode('chart')}
                 className={`px-4 py-2 text-sm font-medium border-l border-gray-300 transition-colors ${
                   viewMode === 'chart' ? 'bg-blue-700 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'
                 }`}
