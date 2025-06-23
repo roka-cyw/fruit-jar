@@ -45,7 +45,7 @@ const FruitTableView = ({ fruits, onAddFruit }: Props) => {
                 <td className='max-w-14 px-3 py-2 whitespace-nowrap overflow-hidden'>
                   <div className='text-xs text-gray-500'>{fruit.genus}</div>
                 </td>
-                <td className='px-2 py-2 whitespace-nowrap w-16 text-center'>
+                <td className='px-2 py-2 whitespace-nowrap w-16'>
                   <div className='text-xs text-gray-500'>{fruit.nutritions.calories}</div>
                 </td>
                 <td className='px-3 py-2 whitespace-nowrap'>
